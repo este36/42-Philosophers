@@ -1,0 +1,7 @@
+philo
+en.subject.pdf
+*.o
+*.out
+*.txt
+*.json
+obj

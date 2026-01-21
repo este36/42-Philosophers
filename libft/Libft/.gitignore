@@ -1,0 +1,6 @@
+*.o
+libft.a
+libft.so
+test
+a.out
+libft-war-machine
