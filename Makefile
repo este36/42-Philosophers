@@ -12,6 +12,10 @@ update_libft:
 	git clone git@github.com:este36/libft.git
 	rm -rf libft/.git
 
+fclean:
+	@$(MAKE) fclean -C philo_bonus
+	@$(MAKE) fclean -C philo
+
 re:
 	@$(MAKE) re -C philo_bonus
 	@$(MAKE) re -C philo

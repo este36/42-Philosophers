@@ -6,9 +6,11 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/22 16:43:58 by emercier         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:03:07 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 void	philo_log(t_philosopher *philo, const char *msg)
 {

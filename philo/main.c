@@ -6,15 +6,15 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/21 20:59:22 by emercier         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:02:55 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	parse_args(t_philo *philo, int argc, char **argv)
+int	parse_args(t_philo_params *params, int argc, char **argv)
 {
-	(void)philo;
+	(void)params;
 	(void)argc;
 	(void)argv;
 	return (0);

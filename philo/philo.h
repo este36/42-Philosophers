@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/22 16:39:59 by emercier         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:05:49 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <stdlib.h>
+# include <pthread.h>
+# include <stdio.h>
 
 # define MIN_DARR_CAP 16
 
@@ -87,24 +89,20 @@ typedef struct s_monitor
 	t_philo_params	params;
 	struct timeval	start;
 	size_t			deaths;
-}	s_monitor;
+}	t_monitor;
 
-int		get_prop(t_prop *prop);
-int		set_prop(t_prop *prop, int val);
+int			get_prop(t_prop *prop);
+int			set_prop(t_prop *prop, int val);
 
-# define LOG_FORK_TAKEN "has taken a fork"
-# define LOG_EATING "is eating"
-# define LOG_SLEEPING "is sleeping"
-# define LOG_THINKING "is thinking"
-# define LOG_DIED "died"
+# define LOG_FORK_TAKEN	"has taken a fork"
+# define LOG_EATING		"is eating"
+# define LOG_SLEEPING	"is sleeping"
+# define LOG_THINKING	"is thinking"
+# define LOG_DIED		"died"
 
-void	log_taken_a_fork(t_philosopher *philo);
-void	log_eating(t_philosopher *philo);
-void	log_sleeping(t_philosopher *philo);
-void	log_thinking(t_philosopher *philo);
-void	log_died(t_philosopher *philo);
+void		philo_log(t_philosopher *philo, const char *msg);
 
-void	monitor(t_monitor *him);
-void	philosopher(t_philosopher *him);
+void		monitor(t_monitor *him);
+void		philosopher(t_philosopher *him);
 
 #endif
