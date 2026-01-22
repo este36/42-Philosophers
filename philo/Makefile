@@ -7,11 +7,9 @@ SRCS_DIR = .
 SRCS =\
 $(SRCS_DIR)/main.c\
 $(SRCS_DIR)/ft_atol.c\
-$(SRCS_DIR)/ft_bzero.c\
-$(SRCS_DIR)/ft_memcpy.c\
-$(SRCS_DIR)/ft_calloc.c\
-$(SRCS_DIR)/ft_realloc.c\
 $(SRCS_DIR)/ft_darr.c\
+$(SRCS_DIR)/utils.c\
+$(SRCS_DIR)/log.c\
 
 OBJS_DIR = obj
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
