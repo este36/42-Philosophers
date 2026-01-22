@@ -2,10 +2,10 @@
 all: mandatory bonus
 
 mandatory:
-	$(MAKE) re -C philo
+	@$(MAKE) --no-print-directory re -C philo
 
 bonus:
-	$(MAKE) re -C philo_bonus
+	@$(MAKE) --no-print-directory re -C philo_bonus
 
 update_libft:
 	rm -rf libft
