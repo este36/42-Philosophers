@@ -33,4 +33,7 @@ fclean: clean
 
 re: clean fclean all
 
+norm:
+	norminette | grep -v 'OK!'
+
 .PHONY: clean fclean all re

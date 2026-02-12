@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:59 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/21 21:02:30 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/12 20:09:47 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_darr_init(t_darr *a, size_t cap, size_t el_size)
 {
-	ft_bzero(a, sizeof(t_darr));
+	memset(a, 0, sizeof(t_darr));
 	a->el_size = el_size;
 	a->cap = cap;
 	a->arr = ft_calloc((cap + 1), el_size);

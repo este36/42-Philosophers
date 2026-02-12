@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/22 17:05:49 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/12 20:12:46 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <string.h>
 
 # define MIN_DARR_CAP 16
 
@@ -33,7 +35,7 @@ int			ft_darr_init(t_darr *a, size_t cap, size_t el_size);
 int			ft_darr_push(t_darr *a, void *el);
 void		*ft_darr_get(t_darr *a, size_t index);
 
-void		ft_bzero(void *s, size_t n);
+long		ft_atol(const char *nptr);
 int			ft_isspace(int c);
 int			ft_isdigit(int c);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
@@ -59,6 +61,7 @@ enum e_philo_state
 
 typedef struct s_philo_params
 {
+	int	number_of_philosophers;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
@@ -75,7 +78,7 @@ typedef struct s_philosopher
 	t_prop			can_eat;
 	t_prop			eat_times;
 	t_prop			last_meal;
-	t_prop			*stop;
+	t_prop			*should_stop;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*cout;
@@ -83,8 +86,8 @@ typedef struct s_philosopher
 
 typedef struct s_monitor
 {
-	t_darr			philos; /* t_darr<t_philosopher> */
-	t_prop			stop;
+	t_philosopher	*philos;
+	t_prop			should_stop;
 	pthread_mutex_t	*cout;
 	t_philo_params	params;
 	struct timeval	start;
