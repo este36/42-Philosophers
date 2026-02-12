@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/12 20:12:46 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:32:27 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_monitor
 {
 	t_philosopher	*philos;
 	t_prop			should_stop;
-	pthread_mutex_t	*cout;
+	pthread_mutex_t	cout;
 	t_philo_params	params;
 	struct timeval	start;
 	size_t			deaths;
