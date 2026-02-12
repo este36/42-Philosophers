@@ -1,29 +1,28 @@
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
-
-SRCS_DIR = .
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS =\
-$(SRCS_DIR)/main.c\
-$(SRCS_DIR)/ft_atol.c\
-$(SRCS_DIR)/ft_darr.c\
-$(SRCS_DIR)/utils.c\
-$(SRCS_DIR)/log.c\
+main.c\
+ft_atol.c\
+ft_darr.c\
+utils.c\
+log.c\
+run_simulation.c\
 
 OBJS_DIR = obj
-OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) -o $@ $(CFLAGS) $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $@
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+$(OBJS_DIR)/%.o: ./%.c
+	$(CC) -o $@ -c $(CFLAGS) $<
 
 clean:
 	rm -rf $(OBJS_DIR)
