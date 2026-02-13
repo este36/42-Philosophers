@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/12 21:32:27 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:02:02 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
+# include <sys/time.h>
 
 # define MIN_DARR_CAP 16
 
