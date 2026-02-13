@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/12 22:04:32 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:14:29 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ bool	run_simulation(t_philo_params params)
 	memset(philos, 0, sizeof(t_philosopher) * params.number_of_philosophers);
 	monitor.philos = philos;
 	if (!init_mutexes(&monitor))
-		return (false);
+		return (free(philos), false);
 	init_philos(&monitor);
 	return (true);
 }
