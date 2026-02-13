@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/13 17:02:02 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:17:21 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <sys/time.h>
-
-# define MIN_DARR_CAP 16
-
-typedef struct s_darr
-{
-	void	*arr;
-	size_t	len;
-	size_t	cap;
-	size_t	el_size;
-}	t_darr;
-
-int			ft_darr_init(t_darr *a, size_t cap, size_t el_size);
-int			ft_darr_push(t_darr *a, void *el);
-void		*ft_darr_get(t_darr *a, size_t index);
 
 long		ft_atol(const char *nptr);
 int			ft_isspace(int c);
