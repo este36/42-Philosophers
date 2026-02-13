@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/12 20:08:53 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:00:31 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 bool	parse_args(t_philo_params *params, int argc, char **argv)
 {
 	memset(params, 0, sizeof(*params));
-	if (argc < 4 || argc > 5)
+	if (argc < 5 || argc > 6)
 		return (false);
 	params->number_of_philosophers = (int)ft_atol(argv[1]);
 	params->time_to_die = (int)ft_atol(argv[2]);
 	params->time_to_eat = (int)ft_atol(argv[3]);
 	params->time_to_sleep = (int)ft_atol(argv[4]);
-	if (argc == 4)
+	if (argc == 6)
 		params->times_must_eat = (int)ft_atol(argv[5]);
 	if (params->number_of_philosophers <= 0 || params->time_to_die <= 0
 		|| params->time_to_eat <= 0 || params->time_to_sleep <= 0
-		|| (argc == 4 && params->times_must_eat <= 0))
+		|| (argc == 6 && params->times_must_eat <= 0))
 	{
 		write(2, "Error: arguments should be greater than zero\n", 45);
 		return (false);
