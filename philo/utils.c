@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:41:38 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/12 20:07:31 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:25:24 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,36 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		n--;
 	}
 	return (dest);
+}
+
+long	now_ms(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) != 0)
+		return (-1);
+	return (tv.tv_sec * 1000L + tv.tv_usec / 1000L);
+}
+
+void	sleep_ms(int ms)
+{
+	const int	chunk_us = 500;
+	int			remaining;
+
+	if (ms <= 0)
+		return ;
+	remaining = ms * 1000;
+	while (remaining > 0)
+	{
+		if (remaining > chunk_us)
+		{
+			usleep(chunk_us);
+			remaining -= chunk_us;
+		}
+		else
+		{
+			usleep(remaining);
+			break ;
+		}
+	}
 }
