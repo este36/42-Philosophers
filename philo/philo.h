@@ -28,6 +28,8 @@ int			ft_isdigit(int c);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_realloc(void *ptr, size_t prev_size, size_t size);
 void		*ft_calloc(size_t nmemb, size_t size);
+long		now_ms(void);
+void		sleep_ms(int ms);
 
 typedef struct s_prop
 {
