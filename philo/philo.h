@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 19:04:01 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:58:31 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_philosopher
 	pthread_t		thread_id;
 	int				id;
 	t_philo_params	params;
-	struct timeval	start;
+	long			start_ms;
 	t_prop			state;
 	t_prop			can_eat;
 	t_prop			eat_times;
@@ -81,7 +81,7 @@ typedef struct s_monitor
 	t_prop			should_stop;
 	pthread_mutex_t	cout;
 	t_philo_params	params;
-	struct timeval	start;
+	long			start_ms;
 	size_t			deaths;
 }	t_monitor;
 

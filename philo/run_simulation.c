@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:36:21 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:24:37 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ static bool	start_philos_threads(t_monitor *m)
 			set_prop(&m->should_stop, true);
 			return (false);
 		}
+		i++;
+	}
+	return (true);
+}
+
+static bool	init_start_time(t_monitor *m)
+{
+	size_t	i;
+	long	start_ms;
+
+	start_ms = now_ms();
+	if (start_ms < 0)
+		return (false);
+	m->start_ms = start_ms;
+	i = 0;
+	while (i < (size_t)m->params.number_of_philosophers)
+	{
+		m->philos[i].start_ms = start_ms;
 		i++;
 	}
 	return (true);
@@ -59,6 +77,8 @@ bool	run_simulation(t_monitor *m)
 		set_prop(&m->should_stop, true);
 		return (false);
 	}
+	if (!init_start_time(m))
+		return (false);
 	pthread_join(monitor_thread_id, NULL);
 	join_philos_threads(m);
 	return (true);

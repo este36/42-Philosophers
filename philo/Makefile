@@ -7,6 +7,7 @@ main.c\
 ft_atol.c\
 utils.c\
 log.c\
+prop_utils.c\
 monitor_utils.c\
 monitor_mutexes.c\
 run_simulation.c\
@@ -34,6 +35,6 @@ fclean: clean
 re: clean fclean all
 
 norm:
-	norminette | grep -v 'OK!'
+	norminette | grep -v 'OK!' || true
 
 .PHONY: clean fclean all re

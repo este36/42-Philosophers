@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:04:10 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/13 17:11:31 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:57:11 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ int	get_prop(t_prop *prop)
 	return (val);
 }
 
-void	set_prop(t_prop *prop, int val)
+int	set_prop(t_prop *prop, int val)
 {
+	int	ret;
+
 	pthread_mutex_lock(&prop->mtx);
 	prop->val = val;
+	ret = prop->val;
 	pthread_mutex_unlock(&prop->mtx);
+	return (ret);
 }

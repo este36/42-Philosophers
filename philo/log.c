@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/01/22 17:03:07 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:57:29 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	philo_log(t_philosopher *philo, const char *msg)
 {
-	int	ms;
+	long	now;
+	int		ms;
 
-	ms = 0; // TODO
+	now = now_ms();
+	if (now < 0)
+		return ;
+	ms = (int)(now - philo->start_ms);
 	pthread_mutex_lock(philo->cout);
-	printf("%d %d %s\n", ms,  philo->id, msg);
+	printf("%d %d %s\n", ms, philo->id, msg);
 	pthread_mutex_unlock(philo->cout);
 }
