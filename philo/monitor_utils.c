@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 21:31:27 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:55:52 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	monitor_destroy(t_monitor *m)
 		return ;
 	if (m->philos != NULL)
 	{
-		monitor_destroy_mutexes(m);
+		monitor_destroy_mutexes(m, m->params.number_of_philosophers);
 		free(m->philos);
 		m->philos = NULL;
 	}

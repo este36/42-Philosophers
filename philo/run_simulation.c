@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 21:24:37 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 22:00:21 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ bool	run_simulation(t_monitor *m)
 	}
 	if (!init_start_time(m))
 		return (false);
+	set_prop(&m->can_start, true);
 	pthread_join(monitor_thread_id, NULL);
 	join_philos_threads(m);
 	return (true);
