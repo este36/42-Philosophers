@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 21:32:23 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:40:58 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ static bool	init_philo_mutexes(t_philosopher *philo)
 	return (true);
 }
 
-void	monitor_destroy_mutexes(t_monitor *m)
+void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count)
 {
-	const size_t	n = m->params.number_of_philosophers;
-
 	if (m->philos != NULL)
-		destroy_philo_mutexes(m->philos, n);
+		destroy_philo_mutexes(m->philos, philos_count);
 	pthread_mutex_destroy(&m->cout);
 	pthread_mutex_destroy(&m->should_stop.mtx);
+	pthread_mutex_destroy(&m->can_start.mtx);
 }
 
 bool	monitor_create_mutexes(t_monitor *m)
@@ -83,12 +82,7 @@ bool	monitor_create_mutexes(t_monitor *m)
 	while (i < n)
 	{
 		if (!init_philo_mutexes(&m->philos[i]))
-		{
-			destroy_philo_mutexes(m->philos, i);
-			pthread_mutex_destroy(&m->cout);
-			pthread_mutex_destroy(&m->should_stop.mtx);
-			return (false);
-		}
+			return (monitor_destroy_mutexes(m, i), false);
 		i++;
 	}
 	return (true);

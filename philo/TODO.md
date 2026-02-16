@@ -4,12 +4,6 @@ This file lists missing pieces and concrete fixes to finish the current
 implementation. It is based on a quick code audit.
 
 ## Critical bugs
-- `monitor_init()` never copies `params` into `m->params` before using it
-  (mutex init + philo wiring currently see zeroes).
-- `monitor_destroy_mutexes()` double-destroys per-philo mutexes
-  (the loop repeatedly destroys already-destroyed mutexes).
-- `main()` exits after `monitor_init()` and never calls `run_simulation()`
-  or cleanup routines.
 
 ## Missing core behavior
 - Implement `philosopher_routine()` thread routine:

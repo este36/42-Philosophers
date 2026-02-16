@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 21:27:57 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:41:25 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_monitor
 int		get_prop(t_prop *prop);
 int		set_prop(t_prop *prop, int val);
 
-void	monitor_destroy_mutexes(t_monitor *m);
+void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
 bool	monitor_create_mutexes(t_monitor *m);
 bool	monitor_init(t_monitor *m, t_philo_params params);
 void	monitor_destroy(t_monitor *m);
