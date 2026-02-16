@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:37:44 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:31:27 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	monitor_init_philos(t_monitor *m)
 		m->philos[i].id = i + 1;
 		m->philos[i].params = m->params;
 		m->philos[i].cout = &m->cout;
+		m->philos[i].can_start = &m->can_start;
 		m->philos[i].should_stop = &m->should_stop;
 		if (i + 1 < n)
 			m->philos[i + 1].left_fork = &m->philos[i].right_fork;

@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:30:12 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:32:23 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ bool	monitor_create_mutexes(t_monitor *m)
 	if (pthread_mutex_init(&m->cout, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&m->should_stop.mtx, NULL) != 0)
+		return (pthread_mutex_destroy(&m->cout), false);
+	if (pthread_mutex_init(&m->can_start.mtx, NULL) != 0)
 	{
-		pthread_mutex_destroy(&m->cout);
-		return (false);
+		pthread_mutex_destroy(&m->should_stop.mtx);
+		return (pthread_mutex_destroy(&m->cout), false);
 	}
 	i = 0;
 	while (i < n)

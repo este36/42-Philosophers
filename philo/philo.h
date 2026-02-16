@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:58:31 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:27:57 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_philosopher
 	t_prop			eat_times;
 	t_prop			last_meal;
 	t_prop			*should_stop;
+	t_prop			*can_start;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*cout;
@@ -78,6 +79,7 @@ typedef struct s_philosopher
 typedef struct s_monitor
 {
 	t_philosopher	*philos;
+	t_prop			can_start;
 	t_prop			should_stop;
 	pthread_mutex_t	cout;
 	t_philo_params	params;
