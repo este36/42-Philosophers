@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/13 17:00:31 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:41:01 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ void	print_usage(char *program_name)
 int	main(int argc, char **argv)
 {
 	t_philo_params		params;
+	t_monitor			monitor;
 
 	if (!parse_args(&params, argc, argv))
 	{
 		print_usage(argv[0]);
 		return (1);
 	}
+	if (!monitor_init(&monitor, params))
+		return (1);
 	return (0);
 }

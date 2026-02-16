@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/13 17:17:21 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:04:01 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@
 # include <string.h>
 # include <sys/time.h>
 
-long		ft_atol(const char *nptr);
-int			ft_isspace(int c);
-int			ft_isdigit(int c);
-void		*ft_memcpy(void *dest, const void *src, size_t n);
-void		*ft_realloc(void *ptr, size_t prev_size, size_t size);
-void		*ft_calloc(size_t nmemb, size_t size);
-long		now_ms(void);
-void		sleep_ms(int ms);
+typedef void	*(*t_pthread_cb)(void *);
+
+long	ft_atol(const char *nptr);
+int		ft_isspace(int c);
+int		ft_isdigit(int c);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_realloc(void *ptr, size_t prev_size, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
+long	now_ms(void);
+void	sleep_ms(int ms);
 
 typedef struct s_prop
 {
@@ -59,7 +61,7 @@ typedef struct s_philo_params
 
 typedef struct s_philosopher
 {
-	pthread_t		tid;
+	pthread_t		thread_id;
 	int				id;
 	t_philo_params	params;
 	struct timeval	start;
@@ -83,8 +85,12 @@ typedef struct s_monitor
 	size_t			deaths;
 }	t_monitor;
 
-int			get_prop(t_prop *prop);
-int			set_prop(t_prop *prop, int val);
+int		get_prop(t_prop *prop);
+int		set_prop(t_prop *prop, int val);
+
+void	monitor_destroy_mutexes(t_monitor *m);
+bool	monitor_create_mutexes(t_monitor *m);
+bool	monitor_init(t_monitor *m, t_philo_params params);
 
 # define LOG_FORK_TAKEN	"has taken a fork"
 # define LOG_EATING		"is eating"
@@ -92,9 +98,10 @@ int			set_prop(t_prop *prop, int val);
 # define LOG_THINKING	"is thinking"
 # define LOG_DIED		"died"
 
-void		philo_log(t_philosopher *philo, const char *msg);
+void	philo_log(t_philosopher *philo, const char *msg);
 
-void		monitor(t_monitor *him);
-void		philosopher(t_philosopher *him);
+bool	run_simulation(t_monitor *m);
+void	*monitor_routine(t_monitor *him);
+void	*philosopher_routine(t_philosopher *him);
 
 #endif

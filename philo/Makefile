@@ -5,9 +5,10 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRCS =\
 main.c\
 ft_atol.c\
-ft_darr.c\
 utils.c\
 log.c\
+monitor_init.c\
+monitor_mutexes.c\
 run_simulation.c\
 
 OBJS_DIR = obj
