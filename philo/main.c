@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 18:41:01 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:25:52 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	if (!monitor_init(&monitor, params))
+		return (1);
+	if (!run_simulation(&monitor))
 		return (1);
 	return (0);
 }

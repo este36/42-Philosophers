@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:06 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 19:55:53 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:26:42 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool	monitor_init(t_monitor *m, t_philo_params params)
 	t_philosopher	*philos;
 
 	memset(m, 0, sizeof(*m));
+	m->params = params;
 	philos = ft_calloc(1, sizeof(t_philosopher) * n_philos);
 	if (philos == NULL)
 		return (false);

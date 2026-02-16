@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 19:58:58 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:30:12 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ bool	monitor_create_mutexes(t_monitor *m)
 	{
 		if (!init_philo_mutexes(&m->philos[i]))
 		{
-			monitor_destroy_mutexes(m);
+			destroy_philo_mutexes(m->philos, i);
+			pthread_mutex_destroy(&m->cout);
+			pthread_mutex_destroy(&m->should_stop.mtx);
 			return (false);
 		}
 		i++;
