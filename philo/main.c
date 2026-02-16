@@ -53,6 +53,10 @@ int	main(int argc, char **argv)
 	if (!monitor_init(&monitor, params))
 		return (1);
 	if (!run_simulation(&monitor))
+	{
+		monitor_destroy(&monitor);
 		return (1);
+	}
+	monitor_destroy(&monitor);
 	return (0);
 }

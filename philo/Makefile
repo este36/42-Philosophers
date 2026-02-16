@@ -7,7 +7,7 @@ main.c\
 ft_atol.c\
 utils.c\
 log.c\
-monitor_init.c\
+monitor_utils.c\
 monitor_mutexes.c\
 run_simulation.c\
 

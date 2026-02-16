@@ -58,11 +58,9 @@ static bool	init_philo_mutexes(t_philosopher *philo)
 void	monitor_destroy_mutexes(t_monitor *m)
 {
 	const size_t	n = m->params.number_of_philosophers;
-	size_t	i;
 
-	i = 0;
-	while (i < n)
-		destroy_philo_mutexes(m->philos, i++);
+	if (m->philos != NULL)
+		destroy_philo_mutexes(m->philos, n);
 	pthread_mutex_destroy(&m->cout);
 	pthread_mutex_destroy(&m->should_stop.mtx);
 }

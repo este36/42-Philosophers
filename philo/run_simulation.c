@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 19:33:24 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:36:21 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static bool	start_philos_threads(t_monitor *m)
 {
 	size_t	i;
+	int		ret;
 
 	i = 0;
 	while (i < (size_t)m->params.number_of_philosophers)
 	{
-		if (pthread_create(
-			&m->philos[i].thread_id, NULL,
-			(t_pthread_cb)philosopher_routine,
-			&m->philos[i]) != 0)
+		ret = pthread_create(&m->philos[i].thread_id,
+				NULL, (t_pthread_cb)philosopher_routine, &m->philos[i]);
+		if (ret != 0)
 		{
 			set_prop(&m->should_stop, true);
 			return (false);
@@ -32,7 +32,7 @@ static bool	start_philos_threads(t_monitor *m)
 	return (true);
 }
 
-static void join_philos_threads(t_monitor *m)
+static void	join_philos_threads(t_monitor *m)
 {
 	size_t	i;
 

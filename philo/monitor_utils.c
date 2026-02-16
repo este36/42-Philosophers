@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_init.c                                     :+:      :+:    :+:   */
+/*   monitor_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/16 18:26:06 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:26:42 by emercier         ###   ########.fr       */
+/*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
+/*   Updated: 2026/02/16 20:37:44 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,16 @@ bool	monitor_init(t_monitor *m, t_philo_params params)
 		return (_monitor_abort(m));
 	monitor_init_philos(m);
 	return (true);
+}
+
+void	monitor_destroy(t_monitor *m)
+{
+	if (m == NULL)
+		return ;
+	if (m->philos != NULL)
+	{
+		monitor_destroy_mutexes(m);
+		free(m->philos);
+		m->philos = NULL;
+	}
 }

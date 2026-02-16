@@ -91,6 +91,7 @@ int		set_prop(t_prop *prop, int val);
 void	monitor_destroy_mutexes(t_monitor *m);
 bool	monitor_create_mutexes(t_monitor *m);
 bool	monitor_init(t_monitor *m, t_philo_params params);
+void	monitor_destroy(t_monitor *m);
 
 # define LOG_FORK_TAKEN	"has taken a fork"
 # define LOG_EATING		"is eating"
