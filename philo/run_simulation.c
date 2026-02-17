@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 22:00:21 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 22:29:35 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static bool	init_start_time(t_monitor *m)
 	while (i < (size_t)m->params.number_of_philosophers)
 	{
 		m->philos[i].start_ms = start_ms;
+		m->philos[i].last_meal.val = start_ms;
 		i++;
 	}
 	return (true);

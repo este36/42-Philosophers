@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 22:51:19 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 22:23:57 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	monitor_destroy(t_monitor *m);
 # define LOG_DIED		"died"
 
 void	philo_log(t_philosopher *philo, const char *msg);
+void	philo_spend_time(t_philosopher *p, long ms);
 
 bool	run_simulation(t_monitor *m);
 void	*monitor_routine(t_monitor *him);

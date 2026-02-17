@@ -5,6 +5,21 @@ implementation. It is based on a quick code audit.
 
 ## Critical bugs
 
+1. Détection de mort inversée → un philo ne meurt jamais.
+     Dans `philosopher_routine.c:19`, la condition est inversée :
+     `get_prop(&p->last_meal) - now_ms() >= time_to_die` devrait être `now_ms() - last_meal >= time_to_die`.
+     Sinon la différence est négative et la mort ne se déclenche pas.
+     Fichier: `philosopher_routine.c:19`.
+2. `last_meal` jamais mis à jour lors de l’eat → logique de mort/sleep incohérente.
+     `philo_is_dead()` et `philo_sleep()` s’appuient sur `last_meal`, mais il n’est jamais mis à jour `dans eat_routine`.
+     Résultat: calculs incohérents (souvent basés sur zéro).
+     Fichier: `philosopher_routine.c:43-52`.
+3. `philo_sleep`: risque de durée négative / type.
+     Dans `philo_sleep.c:36-41`, si t <= 0, `sleep_ms(t)` reçoit une valeur négative (int).
+     Ça sort quasi immédiatement, mais c’est fragile et rend le flow “mort imminente” peu clair.
+     À minima, garde if (t <= 0) return false; avant d’appeler `sleep_ms(t)`.
+     Fichier: `philo_sleep.c:34-41`.
+
 ## Missing core behavior
 - Implement `philosopher_routine()` thread routine:
   - Fork acquisition order to avoid deadlocks.
@@ -34,3 +49,4 @@ implementation. It is based on a quick code audit.
 
 ## Optional improvements
 - Validate numeric arguments strictly (digits only, no overflow).
+
