@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 23:25:46 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 20:07:32 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	philo_can_eat(t_monitor *m, size_t philo_index)
 {
-	t_philosopher *left_philo;
+	t_philosopher	*left_philo;
 
 	if (m->params.number_of_philosophers == 1)
 		return (false);
@@ -29,7 +29,7 @@ static bool	philo_can_eat(t_monitor *m, size_t philo_index)
 
 static bool	still_alive(t_monitor *m)
 {
-	return (now_ms() - m->start_ms < 30000); // temporary
+	return (now_ms() - m->start_ms < 30000); // TODO: implement philos checks
 }
 
 void	*monitor_routine(t_monitor *m)
@@ -50,7 +50,7 @@ void	*monitor_routine(t_monitor *m)
 			}
 			i++;
 		}
-		sleep_ms(1);
+		usleep(15);
 	}
 	set_prop(&m->should_stop, true);
 	return (NULL);

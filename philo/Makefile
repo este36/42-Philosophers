@@ -6,6 +6,7 @@ SRCS =\
 main.c\
 ft_atol.c\
 utils.c\
+sleep_ms.c\
 log.c\
 prop_utils.c\
 monitor_utils.c\
