@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:23:57 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 22:44:50 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sleep_ms(int ms);
 typedef struct s_prop
 {
 	pthread_mutex_t	mtx;
-	int				val;
+	long			val;
 }	t_prop;
 
 enum e_philo_state
@@ -87,9 +87,9 @@ typedef struct s_monitor
 	size_t			deaths;
 }	t_monitor;
 
-int		get_prop(t_prop *prop);
-int		set_prop(t_prop *prop, int val);
-void	wait_prop(t_prop *should_stop, t_prop *prop, int val);
+long	get_prop(t_prop *prop);
+long	set_prop(t_prop *prop, long val);
+void	wait_prop(t_prop *should_stop, t_prop *prop, long val);
 
 void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
 bool	monitor_create_mutexes(t_monitor *m);

@@ -6,15 +6,15 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:04:10 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 23:54:59 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 22:44:15 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	get_prop(t_prop *prop)
+long	get_prop(t_prop *prop)
 {
-	int	val;
+	long	val;
 
 	pthread_mutex_lock(&prop->mtx);
 	val = prop->val;
@@ -22,9 +22,9 @@ int	get_prop(t_prop *prop)
 	return (val);
 }
 
-int	set_prop(t_prop *prop, int val)
+long	set_prop(t_prop *prop, long val)
 {
-	int	ret;
+	long	ret;
 
 	pthread_mutex_lock(&prop->mtx);
 	prop->val = val;
@@ -33,7 +33,7 @@ int	set_prop(t_prop *prop, int val)
 	return (ret);
 }
 
-void	wait_prop(t_prop *should_stop, t_prop *prop, int val)
+void	wait_prop(t_prop *should_stop, t_prop *prop, long val)
 {
 	while (get_prop(prop) != val && !get_prop(should_stop))
 		usleep(15);

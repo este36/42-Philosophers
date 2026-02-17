@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:24:51 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/17 22:35:29 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool	sleep_routine(t_philosopher *p)
 {
 	set_prop(&p->state, STATE_SLEEPING);
 	philo_log(p, LOG_SLEEPING);
-	philo_spend_time(p, p->params.time_to_eat);
+	philo_spend_time(p, p->params.time_to_sleep);
 	return (!philo_is_dead(p));
 }
 
