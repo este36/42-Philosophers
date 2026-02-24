@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 23:12:17 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:02:35 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	philo_log(t_philosopher *philo, const char *msg)
 	long	now;
 	int		ms;
 
+	if (get_prop(philo->should_stop) && ft_strcmp(msg, LOG_DIED) != 0)
+		return ;
 	now = now_ms();
 	if (now < 0)
 		return ;
