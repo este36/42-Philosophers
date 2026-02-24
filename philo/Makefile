@@ -6,7 +6,6 @@ SRCS =\
 main.c\
 ft_atol.c\
 utils.c\
-sleep_ms.c\
 log.c\
 prop_utils.c\
 monitor_utils.c\
@@ -14,6 +13,7 @@ monitor_mutexes.c\
 monitor_routine.c\
 philosopher_routine.c\
 philo_sleep.c\
+sleep_ms.c\
 run_simulation.c\
 
 OBJS_DIR = obj

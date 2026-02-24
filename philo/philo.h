@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:44:50 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:32:17 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_isdigit(int c);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_realloc(void *ptr, size_t prev_size, size_t size);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_strcmp(const char *s1, const char *s2);
 long	now_ms(void);
 void	sleep_ms(int ms);
 
@@ -104,9 +105,10 @@ void	monitor_destroy(t_monitor *m);
 
 void	philo_log(t_philosopher *philo, const char *msg);
 void	philo_spend_time(t_philosopher *p, long ms);
+bool	philo_is_dead(t_philosopher *p);
 
 bool	run_simulation(t_monitor *m);
-void	*monitor_routine(t_monitor *him);
-void	*philosopher_routine(t_philosopher *him);
+void	*monitor_routine(t_monitor *m);
+void	*philosopher_routine(t_philosopher *p);
 
 #endif
