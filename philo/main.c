@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 20:25:52 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:38:37 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ bool	parse_args(t_philo_params *params, int argc, char **argv)
 {
 	memset(params, 0, sizeof(*params));
 	if (argc < 5 || argc > 6)
+	{
+		write(2, "Error: unvalid number of arguments\n", 36);
 		return (false);
+	}
 	params->number_of_philosophers = (int)ft_atol(argv[1]);
 	params->time_to_die = (int)ft_atol(argv[2]);
 	params->time_to_eat = (int)ft_atol(argv[3]);
