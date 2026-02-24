@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:35:29 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:32:36 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ bool	philo_is_dead(t_philosopher *p)
 	if (now_ms() - get_prop(&p->last_meal) >= p->params.time_to_die)
 	{
 		set_prop(&p->state, STATE_DEAD);
-		philo_log(p, LOG_DIED);
 		return (true);
 	}
 	return (false);
@@ -43,7 +42,9 @@ static bool	think_routine(t_philosopher *p)
 static bool	eat_routine(t_philosopher *p)
 {
 	pthread_mutex_lock(p->left_fork);
+	philo_log(p, LOG_FORK_TAKEN);
 	pthread_mutex_lock(&p->right_fork);
+	philo_log(p, LOG_FORK_TAKEN);
 	set_prop(&p->state, STATE_EATING);
 	philo_log(p, LOG_EATING);
 	set_prop(&p->last_meal, now_ms());
@@ -64,6 +65,11 @@ static bool	sleep_routine(t_philosopher *p)
 void	*philosopher_routine(t_philosopher *p)
 {
 	wait_prop(p->should_stop, p->can_start, true);
+	if (p->id % 2)
+	{
+		if (!sleep_routine(p))
+			return (NULL);
+	}
 	while (!get_prop(p->should_stop))
 	{
 		if (!think_routine(p))
