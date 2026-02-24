@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/24 23:32:36 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 00:51:05 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static bool	sleep_routine(t_philosopher *p)
 void	*philosopher_routine(t_philosopher *p)
 {
 	wait_prop(p->should_stop, p->can_start, true);
-	if (p->id % 2)
+	if (p->id % 2 == 0)
 	{
 		if (!sleep_routine(p))
 			return (NULL);
