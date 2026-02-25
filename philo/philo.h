@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 20:29:41 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 21:44:30 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdbool.h>
 # include <sys/time.h>
 
 typedef void	*(*t_pthread_cb)(void *);
@@ -85,7 +86,6 @@ typedef struct s_monitor
 	pthread_mutex_t	cout;
 	t_philo_params	params;
 	long			start_ms;
-	bool			*deaths;
 }	t_monitor;
 
 typedef bool	(*t_monitor_loop)(t_monitor *m);
