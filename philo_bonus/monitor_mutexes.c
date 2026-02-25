@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 20:50:29 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 21:54:17 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static bool	init_philo_mutexes(t_philosopher *philo)
 	{
 		if (pthread_mutex_init((pthread_mutex_t *)mutexes[i], NULL) != 0)
 		{
-			i--;
+			if (i > 0)
+				i--;
 			while (i > 0)
 			{
 				pthread_mutex_destroy((pthread_mutex_t *)mutexes[i]);
