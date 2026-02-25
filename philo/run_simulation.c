@@ -6,13 +6,13 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:30:23 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:34:54 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 22:06:45 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool	start_philos_threads(t_monitor *m)
+static bool	start_philos_threads(t_monitor *m, size_t *created)
 {
 	size_t	i;
 	int		ret;
@@ -25,10 +25,12 @@ static bool	start_philos_threads(t_monitor *m)
 		if (ret != 0)
 		{
 			set_prop(&m->should_stop, true);
+			*created = i;
 			return (false);
 		}
 		i++;
 	}
+	*created = i;
 	return (true);
 }
 
@@ -51,12 +53,27 @@ static bool	init_start_time(t_monitor *m)
 	return (true);
 }
 
-static void	join_philos_threads(t_monitor *m)
+static bool	philos_threads_abort(t_monitor *m, size_t count)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < (size_t)m->params.number_of_philosophers)
+	set_prop(&m->should_stop, true);
+	while (i < count)
+	{
+		pthread_join(m->philos[i].thread_id, NULL);
+		i++;
+	}
+	return (false);
+}
+
+static void	join_philos_threads(t_monitor *m)
+{
+	const size_t	n = m->params.number_of_philosophers;
+	size_t			i;
+
+	i = 0;
+	while (i < n)
 	{
 		pthread_join(m->philos[i].thread_id, NULL);
 		i++;
@@ -66,20 +83,23 @@ static void	join_philos_threads(t_monitor *m)
 bool	run_simulation(t_monitor *m)
 {
 	pthread_t	monitor_thread_id;
+	size_t		created;
 
-	if (!start_philos_threads(m))
-		return (false);
+	created = 0;
+	if (!start_philos_threads(m, &created))
+		return (philos_threads_abort(m, created));
 	if (pthread_create(
 			&monitor_thread_id,
 			NULL,
 			(t_pthread_cb)monitor_routine,
 			m) != 0)
+		return (philos_threads_abort(m, created));
+	if (!init_start_time(m))
 	{
-		set_prop(&m->should_stop, true);
+		philos_threads_abort(m, created);
+		pthread_join(monitor_thread_id, NULL);
 		return (false);
 	}
-	if (!init_start_time(m))
-		return (false);
 	set_prop(&m->can_start, true);
 	pthread_join(monitor_thread_id, NULL);
 	join_philos_threads(m);
