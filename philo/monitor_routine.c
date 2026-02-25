@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 20:47:57 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 21:42:05 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static void	manage_meal(t_monitor *m, size_t philo_index)
 		&& philo_can_eat(m, philo_index))
 	{
 		set_prop(&m->philos[philo_index].can_eat, true);
+		while (
+			get_prop(&m->philos[philo_index].state) != STATE_EATING
+			&& !philo_is_dead(&m->philos[philo_index]))
+		{
+			usleep(4);
+		}
 	}
 }
 
@@ -53,38 +59,35 @@ static bool	monitor_loop_default(t_monitor *m)
 		{
 			set_prop(&m->should_stop, true);
 			philo_log(&m->philos[i], LOG_DIED);
-			return (true);
+			return (false);
 		}
 		manage_meal(m, i);
 		i++;
 	}
-	return (false);
+	return (true);
 }
 
 static bool	monitor_loop_optional(t_monitor *m)
 {
-	int	n_out;
+	int	meal_goals_complete;
 	int	i;
 
 	i = 0;
-	n_out = 0;
+	meal_goals_complete = 0;
 	while (i < m->params.number_of_philosophers)
 	{
 		if (get_prop(&m->philos[i].state) == STATE_DEAD)
 		{
-			if (!m->deaths[i])
-			{
-				philo_log(&m->philos[i], LOG_DIED);
-				m->deaths[i] = true;
-			}
-			n_out++;
+			set_prop(&m->should_stop, true);
+			philo_log(&m->philos[i], LOG_DIED);
+			return (false);
 		}
-		else if (get_prop(&m->philos[i].meal_count) >= m->params.times_must_eat)
-			n_out++;
+		if (get_prop(&m->philos[i].meal_count) >= m->params.times_must_eat)
+			meal_goals_complete++;
 		manage_meal(m, i);
 		i++;
 	}
-	return (n_out == m->params.number_of_philosophers);
+	return (meal_goals_complete != m->params.number_of_philosophers);
 }
 
 void	*monitor_routine(t_monitor *m)
@@ -99,7 +102,7 @@ void	*monitor_routine(t_monitor *m)
 		usleep(15);
 	while (true)
 	{
-		if (monitor_loop(m))
+		if (!monitor_loop(m))
 			break ;
 		usleep(2);
 	}
