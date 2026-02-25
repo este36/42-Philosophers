@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 00:51:05 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:12:36 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static bool	eat_routine(t_philosopher *p)
 	set_prop(&p->state, STATE_EATING);
 	philo_log(p, LOG_EATING);
 	set_prop(&p->last_meal, now_ms());
+	increment_prop(&p->meal_count);
 	philo_spend_time(p, p->params.time_to_eat);
 	pthread_mutex_unlock(p->left_fork);
 	pthread_mutex_unlock(&p->right_fork);
