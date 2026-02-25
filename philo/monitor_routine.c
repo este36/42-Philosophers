@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 21:42:05 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 22:10:11 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,24 @@ static bool	philo_can_eat(t_monitor *m, size_t philo_index)
 	return (true);
 }
 
-static void	manage_meal(t_monitor *m, size_t philo_index)
+static bool	manage_meal(t_monitor *m, size_t philo_index)
 {
 	if (get_prop(&m->philos[philo_index].state) == STATE_THINKING
 		&& philo_can_eat(m, philo_index))
 	{
 		set_prop(&m->philos[philo_index].can_eat, true);
-		while (
-			get_prop(&m->philos[philo_index].state) != STATE_EATING
-			&& !philo_is_dead(&m->philos[philo_index]))
+		while (get_prop(&m->philos[philo_index].state) != STATE_EATING)
 		{
+			if (philo_is_dead(&m->philos[philo_index]))
+			{
+				set_prop(&m->should_stop, true);
+				philo_log(&m->philos[philo_index], LOG_DIED);
+				return (false);
+			}
 			usleep(4);
 		}
 	}
+	return (true);
 }
 
 static bool	monitor_loop_default(t_monitor *m)
@@ -84,7 +89,8 @@ static bool	monitor_loop_optional(t_monitor *m)
 		}
 		if (get_prop(&m->philos[i].meal_count) >= m->params.times_must_eat)
 			meal_goals_complete++;
-		manage_meal(m, i);
+		if (!manage_meal(m, i))
+			return (false);
 		i++;
 	}
 	return (meal_goals_complete != m->params.number_of_philosophers);
