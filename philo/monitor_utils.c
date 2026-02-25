@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/17 22:25:57 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:50:36 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ bool	monitor_init(t_monitor *m, t_philo_params params)
 	m->philos = philos;
 	if (!monitor_create_mutexes(m))
 		return (_monitor_abort(m));
+	m->deaths = ft_calloc(n_philos, sizeof(bool));
 	monitor_init_philos(m);
 	return (true);
 }
@@ -66,6 +67,7 @@ void	monitor_destroy(t_monitor *m)
 	{
 		monitor_destroy_mutexes(m, m->params.number_of_philosophers);
 		free(m->philos);
+		free(m->deaths);
 		m->philos = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/24 23:32:17 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:29:41 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_philosopher
 	long			start_ms;
 	t_prop			state;
 	t_prop			can_eat;
-	t_prop			eat_times;
+	t_prop			meal_count;
 	t_prop			last_meal;
 	t_prop			*should_stop;
 	t_prop			*can_start;
@@ -85,12 +85,15 @@ typedef struct s_monitor
 	pthread_mutex_t	cout;
 	t_philo_params	params;
 	long			start_ms;
-	size_t			deaths;
+	bool			*deaths;
 }	t_monitor;
+
+typedef bool	(*t_monitor_loop)(t_monitor *m);
 
 long	get_prop(t_prop *prop);
 long	set_prop(t_prop *prop, long val);
 void	wait_prop(t_prop *should_stop, t_prop *prop, long val);
+void	increment_prop(t_prop *prop);
 
 void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
 bool	monitor_create_mutexes(t_monitor *m);

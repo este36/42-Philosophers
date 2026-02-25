@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/16 21:40:58 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:50:29 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	destroy_philo_mutexes(t_philosopher *p, size_t count)
 		pthread_mutex_destroy(&p[i].right_fork);
 		pthread_mutex_destroy(&p[i].state.mtx);
 		pthread_mutex_destroy(&p[i].can_eat.mtx);
-		pthread_mutex_destroy(&p[i].eat_times.mtx);
+		pthread_mutex_destroy(&p[i].meal_count.mtx);
 		pthread_mutex_destroy(&p[i].last_meal.mtx);
 		i++;
 	}
@@ -33,7 +33,7 @@ static bool	init_philo_mutexes(t_philosopher *philo)
 	size_t					i;
 	const pthread_mutex_t	*mutexes[5] = {
 		&philo->right_fork, &philo->state.mtx,
-		&philo->can_eat.mtx, &philo->eat_times.mtx,
+		&philo->can_eat.mtx, &philo->meal_count.mtx,
 		&philo->last_meal.mtx,
 	};
 
