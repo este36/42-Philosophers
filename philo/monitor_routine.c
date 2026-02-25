@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 22:10:11 by emercier         ###   ########.fr       */
+/*   Updated: 2026/02/25 22:17:34 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static bool	monitor_loop_default(t_monitor *m)
 			philo_log(&m->philos[i], LOG_DIED);
 			return (false);
 		}
-		manage_meal(m, i);
+		if (!manage_meal(m, i))
+			return (false);
 		i++;
 	}
 	return (true);
@@ -104,8 +105,7 @@ void	*monitor_routine(t_monitor *m)
 		monitor_loop = monitor_loop_optional;
 	else
 		monitor_loop = monitor_loop_default;
-	while (!get_prop(&m->can_start))
-		usleep(15);
+	wait_prop(&m->should_stop, &m->can_start, true);
 	while (true)
 	{
 		if (!monitor_loop(m))
