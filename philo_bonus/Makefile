@@ -1,31 +1,34 @@
-NAME = philo_bonus
+NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
-
-SRCS_DIR = .
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS =\
-$(SRCS_DIR)/main.c\
-$(SRCS_DIR)/ft_atol.c\
-$(SRCS_DIR)/ft_bzero.c\
-$(SRCS_DIR)/ft_memcpy.c\
-$(SRCS_DIR)/ft_calloc.c\
-$(SRCS_DIR)/ft_realloc.c\
-$(SRCS_DIR)/ft_darr.c\
+main.c\
+ft_atol.c\
+utils.c\
+log.c\
+prop_utils.c\
+monitor_utils.c\
+monitor_mutexes.c\
+monitor_routine.c\
+philosopher_routine.c\
+philo_sleep.c\
+sleep_ms.c\
+run_simulation.c\
 
 OBJS_DIR = obj
-OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) -o $@ $(CFLAGS) $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $@
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+$(OBJS_DIR)/%.o: ./%.c
+	$(CC) -o $@ -c $(CFLAGS) $<
 
 clean:
 	rm -rf $(OBJS_DIR)
@@ -34,5 +37,8 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: clean fclean all
+
+norm:
+	norminette | grep -v 'OK!' || true
 
 .PHONY: clean fclean all re
