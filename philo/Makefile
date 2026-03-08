@@ -1,3 +1,4 @@
+
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -40,5 +41,7 @@ re: clean fclean all
 
 norm:
 	norminette | grep -v 'OK!' || true
+
+# valgrind --leak-check=full --show-leak-kinds=all --tool=helgrind --fair-sched=yes
 
 .PHONY: clean fclean all re
