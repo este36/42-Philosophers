@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 20:12:36 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/08 19:56:11 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 bool	philo_is_dead(t_philosopher *p)
 {
-	if (get_prop(&p->state) == STATE_DEAD)
+	long	state;
+
+	state = get_prop(&p->state);
+	if (state == STATE_DEAD)
 		return (true);
+	if (state == STATE_EATING)
+		return (false);
 	if (now_ms() - get_prop(&p->last_meal) >= p->params.time_to_die)
 	{
 		set_prop(&p->state, STATE_DEAD);
@@ -45,9 +50,9 @@ static bool	eat_routine(t_philosopher *p)
 	philo_log(p, LOG_FORK_TAKEN);
 	pthread_mutex_lock(&p->right_fork);
 	philo_log(p, LOG_FORK_TAKEN);
+	set_prop(&p->last_meal, now_ms());
 	set_prop(&p->state, STATE_EATING);
 	philo_log(p, LOG_EATING);
-	set_prop(&p->last_meal, now_ms());
 	increment_prop(&p->meal_count);
 	philo_spend_time(p, p->params.time_to_eat);
 	pthread_mutex_unlock(p->left_fork);
