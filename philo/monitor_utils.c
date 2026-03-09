@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_utils.c                                    :+:      :+:    :+:   */
+/*   monitor_utils.c                                     :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 21:44:39 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:42:43 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ static bool	_monitor_abort(t_monitor *m)
 bool	monitor_init(t_monitor *m, t_philo_params params)
 {
 	const size_t	n_philos = params.number_of_philosophers;
-	t_philosopher	*philos;
 
 	memset(m, 0, sizeof(*m));
 	m->params = params;
-	philos = ft_calloc(1, sizeof(t_philosopher) * n_philos);
-	if (philos == NULL)
+	m->philos = ft_calloc(1, sizeof(t_philosopher) * n_philos);
+	m->choices = ft_calloc(1, sizeof(t_philosopher) * n_philos);
+	if (m->philos == NULL || m->choices == NULL)
 		return (false);
-	m->philos = philos;
 	if (!monitor_create_mutexes(m))
 		return (_monitor_abort(m));
 	monitor_init_philos(m);

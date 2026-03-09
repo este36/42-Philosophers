@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo.h                                             :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 21:44:30 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:40:53 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_philosopher
 typedef struct s_monitor
 {
 	t_philosopher	*philos;
+	t_philosopher	*choices;
+	size_t			choices_len;
 	t_prop			can_start;
 	t_prop			should_stop;
 	pthread_mutex_t	cout;
@@ -95,6 +97,7 @@ long	set_prop(t_prop *prop, long val);
 void	wait_prop(t_prop *should_stop, t_prop *prop, long val);
 void	increment_prop(t_prop *prop);
 
+void	monitor_choose(t_monitor *m);
 void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
 bool	monitor_create_mutexes(t_monitor *m);
 bool	monitor_init(t_monitor *m, t_philo_params params);
