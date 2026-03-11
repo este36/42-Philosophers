@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:55:55 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 14:26:31 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/11 16:14:45 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,17 @@ bool	monitor_choose(t_monitor *m)
 	size_t	i;
 	size_t	j;
 
+	if (m->choices_count == 0)
+		return (true);
+	// DEBUG
+	log_debug("number of choices: %zu\n", m->choices_count);
+	for (size_t k = 0; k < m->choices_count; k++)
+	{
+		log_debug("%p", m->choices[k]);
+		if (k + 1 < m->choices_count) log_debug(", ");
+	}
+	log_debug("\n");
+	// DEBUG
 	if (m->choices_count == 1)
 		return (monitor_philo_eat(m, m->choices[0]));
 	i = 0;

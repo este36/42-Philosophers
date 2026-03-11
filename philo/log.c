@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   log.c                                               :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/24 23:02:35 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/11 16:14:54 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,18 @@ void	philo_log(t_philosopher *philo, const char *msg)
 	pthread_mutex_lock(philo->cout);
 	printf("%d %d %s\n", ms, philo->id, msg);
 	pthread_mutex_unlock(philo->cout);
+}
+
+#define LOG_FILE 
+#include <string.h>
+#include <stdio.h>
+#include <fcntl.h>
+void	log_debug(const char *fmt, ...)
+{
+	va_list	arg_list;
+	int fd = open("result.txt", O_CREAT | O_APPEND | O_WRONLY, 0777);
+	va_start(arg_list, fmt);
+	vdprintf(fd, fmt, arg_list);
+	va_end(arg_list);
+	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 14:17:10 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/11 16:05:04 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static bool	manage_meal(t_monitor *m, t_philosopher *p)
 {
 	int	choice_index;
 
+	if (m->choices_count == 0)
+		choice_index = 0;
+	else
+		choice_index = m->choices_count - 1;
 	if (get_prop(&p->state) == STATE_THINKING
 		&& philo_can_eat(m, p))
 	{
-		if (m->choices_count == 0)
-			choice_index = 0;
-		else
-			choice_index = m->choices_count - 1;
 		m->choices[choice_index] = p;
 		m->choices_count++;
 	}
