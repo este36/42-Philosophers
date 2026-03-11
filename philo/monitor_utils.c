@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/09 16:42:43 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/11 12:26:04 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	monitor_init(t_monitor *m, t_philo_params params)
 	memset(m, 0, sizeof(*m));
 	m->params = params;
 	m->philos = ft_calloc(1, sizeof(t_philosopher) * n_philos);
-	m->choices = ft_calloc(1, sizeof(t_philosopher) * n_philos);
+	m->choices = ft_calloc(1, sizeof(t_philosopher *) * n_philos);
 	if (m->philos == NULL || m->choices == NULL)
 		return (false);
 	if (!monitor_create_mutexes(m))

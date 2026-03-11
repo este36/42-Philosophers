@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prop_utils.c                                       :+:      :+:    :+:   */
+/*   prop_utils.c                                        :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:04:10 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 20:08:28 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/11 15:05:27 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long	set_prop(t_prop *prop, long val)
 void	wait_prop(t_prop *should_stop, t_prop *prop, long val)
 {
 	while (get_prop(prop) != val && !get_prop(should_stop))
-		usleep(15);
+		usleep(8);
 }
 
 void	increment_prop(t_prop *prop)

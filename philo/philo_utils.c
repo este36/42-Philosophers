@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   philo_utils.c                                       :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:37:51 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 12:41:54 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/11 14:15:54 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index)
 	return (res);
 }
 
-bool	philo_can_eat(t_monitor *m, size_t philo_index)
+bool	philo_can_eat(t_monitor *m, t_philosopher *p)
 {
 	t_philosopher	*left_philo;
 	t_philosopher	*right_philo;
 
 	if (m->params.number_of_philosophers == 1)
 		return (false);
-	left_philo = get_left_philo(m, philo_index);
-	right_philo = get_left_philo(m, philo_index);
+	left_philo = get_left_philo(m, p->id - 1);
+	right_philo = get_right_philo(m, p->id - 1);
 	if (get_prop(&left_philo->state) == STATE_EATING
 		|| get_prop(&right_philo->state) == STATE_EATING)
 		return (false);

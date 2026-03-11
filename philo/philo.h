@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 12:49:52 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/11 14:12:50 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,11 @@ typedef struct s_philosopher
 	pthread_mutex_t	*cout;
 }	t_philosopher;
 
-t_philosopher	*get_left_philo(t_monitor *m, size_t philo_index);
-t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index);
-bool			philo_can_eat(t_monitor *m, size_t philo_index);
-
 typedef struct s_monitor
 {
 	t_philosopher	*philos;
 	t_philosopher	**choices;
-	size_t			choices_len;
+	size_t			choices_count;
 	t_prop			can_start;
 	t_prop			should_stop;
 	pthread_mutex_t	cout;
@@ -101,11 +97,16 @@ long			set_prop(t_prop *prop, long val);
 void			wait_prop(t_prop *should_stop, t_prop *prop, long val);
 void			increment_prop(t_prop *prop);
 
-void			monitor_choose(t_monitor *m);
+t_philosopher	*get_left_philo(t_monitor *m, size_t philo_index);
+t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index);
+bool			philo_can_eat(t_monitor *m, t_philosopher *p);
+
+bool			monitor_choose(t_monitor *m);
 void			monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
 bool			monitor_create_mutexes(t_monitor *m);
 bool			monitor_init(t_monitor *m, t_philo_params params);
 void			monitor_destroy(t_monitor *m);
+bool			monitor_philo_eat(t_monitor *m, t_philosopher *p);
 
 # define LOG_FORK_TAKEN	"has taken a fork"
 # define LOG_EATING		"is eating"

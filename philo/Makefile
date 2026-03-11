@@ -10,6 +10,7 @@ utils.c\
 log.c\
 prop_utils.c\
 monitor_utils.c\
+monitor_choose.c\
 monitor_mutexes.c\
 monitor_routine.c\
 philosopher_routine.c\
