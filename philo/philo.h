@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/09 16:40:53 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/11 12:49:52 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 
 typedef void	*(*t_pthread_cb)(void *);
 
-long	ft_atol(const char *nptr);
-int		ft_isspace(int c);
-int		ft_isdigit(int c);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_realloc(void *ptr, size_t prev_size, size_t size);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-long	now_ms(void);
-void	sleep_ms(int ms);
+long			ft_atol(const char *nptr);
+int				ft_isspace(int c);
+int				ft_isdigit(int c);
+void			*ft_memcpy(void *dest, const void *src, size_t n);
+void			*ft_realloc(void *ptr, size_t prev_size, size_t size);
+void			*ft_calloc(size_t nmemb, size_t size);
+int				ft_strcmp(const char *s1, const char *s2);
+long			now_ms(void);
+void			sleep_ms(int ms);
 
 typedef struct s_prop
 {
@@ -78,10 +78,14 @@ typedef struct s_philosopher
 	pthread_mutex_t	*cout;
 }	t_philosopher;
 
+t_philosopher	*get_left_philo(t_monitor *m, size_t philo_index);
+t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index);
+bool			philo_can_eat(t_monitor *m, size_t philo_index);
+
 typedef struct s_monitor
 {
 	t_philosopher	*philos;
-	t_philosopher	*choices;
+	t_philosopher	**choices;
 	size_t			choices_len;
 	t_prop			can_start;
 	t_prop			should_stop;
@@ -92,16 +96,16 @@ typedef struct s_monitor
 
 typedef bool	(*t_monitor_loop)(t_monitor *m);
 
-long	get_prop(t_prop *prop);
-long	set_prop(t_prop *prop, long val);
-void	wait_prop(t_prop *should_stop, t_prop *prop, long val);
-void	increment_prop(t_prop *prop);
+long			get_prop(t_prop *prop);
+long			set_prop(t_prop *prop, long val);
+void			wait_prop(t_prop *should_stop, t_prop *prop, long val);
+void			increment_prop(t_prop *prop);
 
-void	monitor_choose(t_monitor *m);
-void	monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
-bool	monitor_create_mutexes(t_monitor *m);
-bool	monitor_init(t_monitor *m, t_philo_params params);
-void	monitor_destroy(t_monitor *m);
+void			monitor_choose(t_monitor *m);
+void			monitor_destroy_mutexes(t_monitor *m, size_t philos_count);
+bool			monitor_create_mutexes(t_monitor *m);
+bool			monitor_init(t_monitor *m, t_philo_params params);
+void			monitor_destroy(t_monitor *m);
 
 # define LOG_FORK_TAKEN	"has taken a fork"
 # define LOG_EATING		"is eating"
@@ -109,12 +113,12 @@ void	monitor_destroy(t_monitor *m);
 # define LOG_THINKING	"is thinking"
 # define LOG_DIED		"died"
 
-void	philo_log(t_philosopher *philo, const char *msg);
-void	philo_spend_time(t_philosopher *p, long ms);
-bool	philo_is_dead(t_philosopher *p);
+void			philo_log(t_philosopher *philo, const char *msg);
+void			philo_spend_time(t_philosopher *p, long ms);
+bool			philo_is_dead(t_philosopher *p);
 
-bool	run_simulation(t_monitor *m);
-void	*monitor_routine(t_monitor *m);
-void	*philosopher_routine(t_philosopher *p);
+bool			run_simulation(t_monitor *m);
+void			*monitor_routine(t_monitor *m);
+void			*philosopher_routine(t_philosopher *p);
 
 #endif

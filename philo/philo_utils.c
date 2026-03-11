@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 12:37:51 by emercier          #+#    #+#             */
+/*   Updated: 2026/03/11 12:41:54 by emercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+t_philosopher	*get_left_philo(t_monitor *m, size_t philo_index)
+{
+	t_philosopher	*res;
+
+	if (philo_index == 0)
+		res = &m->philos[m->params.number_of_philosophers - 1];
+	else
+		res = &m->philos[philo_index - 1];
+	return (res);
+}
+
+t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index)
+{
+	t_philosopher	*res;
+
+	if (philo_index == (size_t)m->params.number_of_philosophers - 1)
+		res = &m->philos[0];
+	else
+		res = &m->philos[philo_index + 1];
+	return (res);
+}
+
+bool	philo_can_eat(t_monitor *m, size_t philo_index)
+{
+	t_philosopher	*left_philo;
+	t_philosopher	*right_philo;
+
+	if (m->params.number_of_philosophers == 1)
+		return (false);
+	left_philo = get_left_philo(m, philo_index);
+	right_philo = get_left_philo(m, philo_index);
+	if (get_prop(&left_philo->state) == STATE_EATING
+		|| get_prop(&right_philo->state) == STATE_EATING)
+		return (false);
+	return (true);
+}

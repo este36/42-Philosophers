@@ -14,6 +14,7 @@ monitor_mutexes.c\
 monitor_routine.c\
 philosopher_routine.c\
 philo_sleep.c\
+philo_utils.c\
 sleep_ms.c\
 run_simulation.c\
 
