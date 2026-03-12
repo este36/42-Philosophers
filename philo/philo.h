@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 20:14:02 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:43:19 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int				ft_isdigit(int c);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_realloc(void *ptr, size_t prev_size, size_t size);
 void			*ft_calloc(size_t nmemb, size_t size);
-void			log_debug(const char *fmt, ...);
 int				ft_strcmp(const char *s1, const char *s2);
 long			now_ms(void);
 void			sleep_ms(int ms);

@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:23:09 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 18:32:32 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:43:33 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	main(int argc, char **argv)
 		monitor_destroy(&monitor);
 		return (1);
 	}
-	log_debug("END: %d\n", now_ms() - monitor.start_ms);
 	monitor_destroy(&monitor);
 	return (0);
 }

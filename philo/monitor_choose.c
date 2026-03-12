@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:55:55 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 21:37:08 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:43:47 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,6 @@ bool	choices_left(t_monitor *m)
 		return (false);
 	if (m->choices_count == 1)
 	{
-		const long now = now_ms();
-		pthread_mutex_lock(&m->cout);
-		log_debug("(%d): number of choices: %d: [", now - m->start_ms, m->choices_count);
-		for (size_t k = 0; k < m->choices_count; k++)
-		{
-			log_debug("{id: %d, last_meal_end: %d}", m->choices[k]->id, (int)now - get_prop(&m->choices[k]->last_meal_end));
-			if (k + 1 < m->choices_count) log_debug(", ");
-			else log_debug("]\n");
-		}
-		pthread_mutex_unlock(&m->cout);
 		m->choices_count = 0;
 		monitor_philo_eat(m, m->choices[0]);
 		return (false);
@@ -112,17 +102,6 @@ bool	monitor_choose(t_monitor *m)
 
 	while (choices_left(m))
 	{
-		// (12408) number of choices: 2: [{id: 5, last_meal_end: 200}, {id: 3, last_meal_end: 200}]
-		const long now = now_ms();
-		pthread_mutex_lock(&m->cout);
-		log_debug("(%d): number of choices: %d: [", now - m->start_ms, m->choices_count);
-		for (size_t k = 0; k < m->choices_count; k++)
-		{
-			log_debug("{id: %d, last_meal_end: %d}", m->choices[k]->id, (int)now - get_prop(&m->choices[k]->last_meal_end));
-			if (k + 1 < m->choices_count) log_debug(", ");
-			else log_debug("]\n");
-		}
-		pthread_mutex_unlock(&m->cout);
 		i = 0;
 		while (i < m->choices_count)
 		{
