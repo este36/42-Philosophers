@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_routine.c                                   :+:    :+:           */
+/*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 16:05:04 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/12 21:22:37 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	monitor_philo_eat(t_monitor *m, t_philosopher *p)
 {
+	if (!philo_can_eat(m, p))
+		return (true);
 	set_prop(&p->can_eat, true);
 	while (get_prop(&p->state) != STATE_EATING)
 	{
@@ -28,21 +30,22 @@ bool	monitor_philo_eat(t_monitor *m, t_philosopher *p)
 	return (true);
 }
 
-static bool	manage_meal(t_monitor *m, t_philosopher *p)
+static void	manage_meal(t_monitor *m, t_philosopher *p)
 {
-	int	choice_index;
+	size_t	i;
 
-	if (m->choices_count == 0)
-		choice_index = 0;
-	else
-		choice_index = m->choices_count - 1;
-	if (get_prop(&p->state) == STATE_THINKING
-		&& philo_can_eat(m, p))
+	if (get_prop(&p->state) == STATE_THINKING)
 	{
-		m->choices[choice_index] = p;
-		m->choices_count++;
+		i = 0;
+		while (i < m->choices_count)
+		{
+			if (m->choices[i]->id == p->id)
+				return ;
+			i++;
+		}
+		m->choices[m->choices_count++] = p;
 	}
-	return (true);
+	return ;
 }
 
 static bool	monitor_loop_default(t_monitor *m)
@@ -58,8 +61,7 @@ static bool	monitor_loop_default(t_monitor *m)
 			philo_log(&m->philos[i], LOG_DIED);
 			return (false);
 		}
-		if (!manage_meal(m, &m->philos[i]))
-			return (false);
+		manage_meal(m, &m->philos[i]);
 		i++;
 	}
 	return (monitor_choose(m));
@@ -82,8 +84,7 @@ static bool	monitor_loop_optional(t_monitor *m)
 		}
 		if (get_prop(&m->philos[i].meal_count) >= m->params.times_must_eat)
 			meal_goals_complete++;
-		if (!manage_meal(m, &m->philos[i]))
-			return (false);
+		manage_meal(m, &m->philos[i]);
 		i++;
 	}
 	return (
@@ -104,7 +105,6 @@ void	*monitor_routine(t_monitor *m)
 	{
 		if (!monitor_loop(m))
 			break ;
-		m->choices_count = 0;
 	}
 	set_prop(&m->should_stop, true);
 	return (NULL);

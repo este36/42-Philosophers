@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                             :+:    :+:           */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:21:54 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/12 20:14:02 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_philosopher
 	t_prop			can_eat;
 	t_prop			meal_count;
 	t_prop			last_meal;
+	t_prop			last_meal_end;
 	t_prop			*should_stop;
 	t_prop			*can_start;
 	pthread_mutex_t	*left_fork;
