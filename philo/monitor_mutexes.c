@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:26:15 by emercier          #+#    #+#             */
-/*   Updated: 2026/02/25 21:54:17 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:53:12 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	destroy_philo_mutexes(t_philosopher *p, size_t count)
 		pthread_mutex_destroy(&p[i].can_eat.mtx);
 		pthread_mutex_destroy(&p[i].meal_count.mtx);
 		pthread_mutex_destroy(&p[i].last_meal.mtx);
+		pthread_mutex_destroy(&p[i].last_meal_end.mtx);
 		i++;
 	}
 }
@@ -31,14 +32,14 @@ static void	destroy_philo_mutexes(t_philosopher *p, size_t count)
 static bool	init_philo_mutexes(t_philosopher *philo)
 {
 	size_t					i;
-	const pthread_mutex_t	*mutexes[5] = {
+	const pthread_mutex_t	*mutexes[6] = {
 		&philo->right_fork, &philo->state.mtx,
 		&philo->can_eat.mtx, &philo->meal_count.mtx,
-		&philo->last_meal.mtx,
+		&philo->last_meal.mtx, &philo->last_meal_end.mtx,
 	};
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		if (pthread_mutex_init((pthread_mutex_t *)mutexes[i], NULL) != 0)
 		{

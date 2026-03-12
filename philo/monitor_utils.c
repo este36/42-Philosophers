@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 20:37:43 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 20:14:10 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:56:56 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	monitor_destroy(t_monitor *m)
 		free(m->philos);
 		m->philos = NULL;
 	}
+	free(m->choices);
 }

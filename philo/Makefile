@@ -44,6 +44,7 @@ re: clean fclean all
 norm:
 	norminette | grep -v 'OK!' || true
 
-# valgrind --leak-check=full --show-leak-kinds=all --tool=helgrind --fair-sched=yes
+valgrind: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --fair-sched=yes ./$(NAME) $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: clean fclean all re
