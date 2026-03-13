@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:48:25 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 18:42:21 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:42:29 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ bool	philo_is_dead(t_philosopher *p)
 	state = get_prop(&p->state);
 	if (state == STATE_DEAD)
 		return (true);
-	if (state == STATE_EATING)
-		return (false);
 	if (now_ms() - get_prop(&p->last_meal) >= p->params.time_to_die)
 	{
 		set_prop(&p->state, STATE_DEAD);
