@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:37:51 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 17:28:16 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 18:16:46 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ t_philosopher	*get_right_philo(t_monitor *m, size_t philo_index)
 	return (res);
 }
 
-t_philosopher	*starvest_philo(t_monitor *m)
-{
-	t_philosopher	*starvest;
-	size_t			i;
-
-	i = 0;
-	starvest = &m->philos[i];
-	while (i < (size_t)m->params.number_of_philosophers)
-	{
-		if (get_prop(&m->philos[i].last_meal_end)
-			< get_prop(&starvest->last_meal_end))
-			starvest = &m->philos[i];
-		i++;
-	}
-	return (starvest);
-}
-
 bool	philo_can_eat(t_monitor *m, t_philosopher *p)
 {
 	t_philosopher	*left_philo;
@@ -58,13 +41,6 @@ bool	philo_can_eat(t_monitor *m, t_philosopher *p)
 
 	if (m->params.number_of_philosophers == 1)
 		return (false);
-	if (p == starvest_philo(m))
-	{
-		pthread_mutex_lock(p->cout);
-		log_debug("philo %d is the starvest\n", p->id);
-		pthread_mutex_unlock(p->cout);
-		return (true);
-	}
 	left_philo = get_left_philo(m, p->id - 1);
 	right_philo = get_right_philo(m, p->id - 1);
 	if (get_prop(&left_philo->state) == STATE_EATING
