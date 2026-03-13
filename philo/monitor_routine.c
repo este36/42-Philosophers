@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 21:22:37 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:54:14 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	*monitor_routine(t_monitor *m)
 	else
 		monitor_loop = monitor_loop_default;
 	wait_prop(&m->should_stop, &m->can_start, true);
+	usleep(300);
 	while (true)
 	{
 		if (!monitor_loop(m))

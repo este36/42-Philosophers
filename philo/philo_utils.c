@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                       :+:    :+:           */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:37:51 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/11 14:15:54 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/13 17:01:31 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ bool	philo_can_eat(t_monitor *m, t_philosopher *p)
 
 	if (m->params.number_of_philosophers == 1)
 		return (false);
+	if ((int)now_ms() - get_prop(&p->last_meal_end)
+		> (int)p->params.time_to_sleep * 0.7)
+		return (true);
 	left_philo = get_left_philo(m, p->id - 1);
 	right_philo = get_right_philo(m, p->id - 1);
 	if (get_prop(&left_philo->state) == STATE_EATING
