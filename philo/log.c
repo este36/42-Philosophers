@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 16:26:01 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:28:17 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	debug_choices(t_monitor *m)
 	{
 		p = m->choices[i];
 		log_debug("{id: %d, last_meal_end: %d}",
-			p->id, now - (int)get_prop(&p->last_meal_end));
+			p->id, (int)now - (int)get_prop(&p->last_meal_end));
 		if (i + 1 < m->choices_count)
 			log_debug(", ");
 		else
