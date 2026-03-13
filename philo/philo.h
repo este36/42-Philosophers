@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 21:43:19 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:53:12 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			*ft_calloc(size_t nmemb, size_t size);
 int				ft_strcmp(const char *s1, const char *s2);
 long			now_ms(void);
 void			sleep_ms(int ms);
+void			log_debug(const char *format, ...);
 
 typedef struct s_prop
 {

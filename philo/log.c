@@ -6,11 +6,14 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/12 21:43:25 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:52:49 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
+#include <stdarg.h>
+#include <fcntl.h>
 
 void	philo_log(t_philosopher *philo, const char *msg)
 {
@@ -26,4 +29,19 @@ void	philo_log(t_philosopher *philo, const char *msg)
 	pthread_mutex_lock(philo->cout);
 	printf("%d %d %s\n", ms, philo->id, msg);
 	pthread_mutex_unlock(philo->cout);
+}
+
+void	log_debug(const char *format, ...)
+{
+	int			fd;
+	va_list		lst;
+
+	fd = open("result.txt", O_CREAT | O_APPEND | O_WRONLY, 0666);
+	if (fd > 0)
+	{
+		va_start(lst, format);
+		vdprintf(fd, format, lst);
+		va_end(lst);
+		close(fd);
+	}
 }
