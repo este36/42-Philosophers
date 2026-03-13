@@ -18,6 +18,7 @@ philo_sleep.c\
 philo_utils.c\
 sleep_ms.c\
 run_simulation.c\
+#log_debug.c\
 
 OBJS_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

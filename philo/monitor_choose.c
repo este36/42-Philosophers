@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:55:55 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 18:18:42 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 18:24:16 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ bool	monitor_choose(t_monitor *m)
 
 	while (choices_left(m))
 	{
-		debug_choices(m);
 		best = m->choices[0];
 		i = 1;
 		while (i < m->choices_count)

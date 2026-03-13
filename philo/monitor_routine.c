@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 21:52:22 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 17:31:42 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 18:24:43 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ bool	monitor_philo_eat(t_monitor *m, t_philosopher *p)
 		}
 		usleep(2);
 	}
-	pthread_mutex_lock(&m->cout);
-	log_debug("DONE\n");
-	pthread_mutex_unlock(&m->cout);
 	return (true);
 }
 
