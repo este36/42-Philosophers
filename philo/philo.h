@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 15:53:12 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:02:00 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			*ft_calloc(size_t nmemb, size_t size);
 int				ft_strcmp(const char *s1, const char *s2);
 long			now_ms(void);
 void			sleep_ms(int ms);
-void			log_debug(const char *format, ...);
 
 typedef struct s_prop
 {
@@ -123,5 +122,8 @@ bool			philo_is_dead(t_philosopher *p);
 bool			run_simulation(t_monitor *m);
 void			*monitor_routine(t_monitor *m);
 void			*philosopher_routine(t_philosopher *p);
+
+void			log_debug(const char *format, ...);
+void			debug_choices(t_monitor *m);
 
 #endif

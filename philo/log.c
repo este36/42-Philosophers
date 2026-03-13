@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:28:00 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 15:52:49 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:06:40 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,33 @@ void	philo_log(t_philosopher *philo, const char *msg)
 	ms = (int)(now - philo->start_ms);
 	pthread_mutex_lock(philo->cout);
 	printf("%d %d %s\n", ms, philo->id, msg);
+	log_debug("----		%d %d %s\n", ms, philo->id, msg);
 	pthread_mutex_unlock(philo->cout);
+}
+
+void	debug_choices(t_monitor *m)
+{
+	size_t			i;
+	long			now;
+	t_philosopher	*p;
+
+	now = now_ms();
+	pthread_mutex_lock(&m->cout);
+	log_debug("(%d) %d choice(s): [",
+		(int)now - m->start_ms, m->choices_count);
+	i = 0;
+	while (i < m->choices_count)
+	{
+		p = m->choices[i];
+		log_debug("{id: %d, last_meal_end: %d}",
+			p->id, (int)get_prop(&p->last_meal_end) - p->start_ms);
+		if (i + 1 < m->choices_count)
+			log_debug(", ");
+		else
+			log_debug("]\n");
+		i++;
+	}
+	pthread_mutex_unlock(&m->cout);
 }
 
 void	log_debug(const char *format, ...)
