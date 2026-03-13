@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 20:27:53 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 18:16:58 by emercier         ###   ########.fr       */
+/*   Created: 2026/03/13 21:22:16 by emercier          #+#    #+#             */
+/*   Updated: 2026/03/13 21:22:17 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_monitor
 	t_philosopher	*philos;
 	t_philosopher	**choices;
 	size_t			choices_count;
+	bool			first_odd_eat;
 	t_prop			can_start;
 	t_prop			should_stop;
 	pthread_mutex_t	cout;
@@ -118,6 +119,7 @@ bool			monitor_philo_eat(t_monitor *m, t_philosopher *p);
 void			philo_log(t_philosopher *philo, const char *msg);
 void			philo_spend_time(t_philosopher *p, long ms);
 bool			philo_is_dead(t_philosopher *p);
+bool			is_odd_thinking(t_monitor *m, t_philosopher *p);
 
 bool			run_simulation(t_monitor *m);
 void			*monitor_routine(t_monitor *m);

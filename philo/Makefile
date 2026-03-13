@@ -18,7 +18,7 @@ philo_sleep.c\
 philo_utils.c\
 sleep_ms.c\
 run_simulation.c\
-#log_debug.c\
+log_debug.c\
 
 OBJS_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -46,6 +46,7 @@ norm:
 	norminette | grep -v 'OK!' || true
 
 valgrind: $(NAME)
+	@rm -rf result.txt
 	valgrind --leak-check=full --show-leak-kinds=all --fair-sched=yes ./$(NAME) $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: clean fclean all re
