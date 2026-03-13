@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:55:55 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/13 16:13:49 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/13 17:49:09 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ bool	choices_left(t_monitor *m)
 	return (false);
 }
 
-bool	monitor_choose(t_monitor *m)
+bool monitor_choose(t_monitor *m)
 {
 	size_t			i;
 	t_philosopher	*best;
@@ -104,19 +104,13 @@ bool	monitor_choose(t_monitor *m)
 	{
 		i = 0;
 		debug_choices(m); // debug
-		while (i < m->choices_count)
-		{
-			if (i == m->choices_count - 1
-				|| !is_neighboor(m, m->choices[i]->id, m->choices[i + 1]->id))
-			{
-				best = get_best_choice(m, 0, i + 1);
-				if (!monitor_philo_eat(m, best))
-					return (false);
-				remove_unordered(m, best->id);
-				break ;
-			}
+		while (i < m->choices_count - 1
+			&& is_neighboor(m, m->choices[i]->id, m->choices[i + 1]->id))
 			i++;
-		}
+		best = get_best_choice(m, 0, i + 1);
+		if (!monitor_philo_eat(m, best))
+			return (false);
+		remove_unordered(m, best->id);
 	}
 	return (!get_prop(&m->should_stop));
 }
